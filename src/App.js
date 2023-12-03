@@ -4,18 +4,21 @@ import Sidebar from './Sidebar';
 import Chat from './Chat';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-
 function App() {
   return (
     <div className="app">
       <div className='app__body'>
-        <Router>
-          <Sidebar/>
-          <Routes>
-            <Route path="/rooms/:roomId" element={<Chat />} />
-            <Route path="/" element={<Chat />} />
-          </Routes>
-        </Router>
+      <Router>
+       <Routes>
+        <Route path="/rooms/:roomId">
+           <Sidebar />
+          <Chat />
+        </Route>
+        <Route path='/' />
+        <Chat />
+          <Route />
+        </Routes>   
+      </Router>
       </div>
     </div>
   );

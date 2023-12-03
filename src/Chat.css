@@ -39,6 +39,16 @@
     overflow: scroll;
 }
 
+.chat_reciever {
+    margin-left: auto;
+    background-color: #dcf8c6;
+  }
+
+.chat_name{
+    top: -15px;
+    font-weight: 800;
+    font-size: xx-small;
+}
 .chat_message {
     position: relative;
     font-size: 16px;
@@ -48,18 +58,6 @@
     background-color: #ffffff;
     margin-bottom: 30px;
 }
-
-.chat_reciever {
-    margin-left: auto;
-    background-color: #dcf8c6;
-}
-
-.chat_name{
-    top: -15px;
-    font-weight: 800;
-    font-size: xx-small;
-}
-
 
 .chat_timestamp{
     margin-left: 10px;
