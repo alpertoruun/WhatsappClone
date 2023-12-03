@@ -13,8 +13,10 @@ function Chat() {
     const sendMessage = (e) => {
         e.preventDefault();
         console.log("you typed>>>>>>>",input);
-
+        setInput("");
     }
+
+    
     return <div className="chat">
         <div className="chat_header">
             <Avatar src={'https://api.dicebear.com/7.x/bottts/svg?seed=Charlie'} />
