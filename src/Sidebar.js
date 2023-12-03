@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import './Sidebar.css'
 import { Avatar, IconButton } from "@material-ui/core"
 import DonutLargeIcon from "@material-ui/icons/DonutLarge"
@@ -7,7 +7,11 @@ import MoreVertIcon from "@material-ui/icons/MoreVert"
 import { SearchOutlined } from "@material-ui/icons";
 import SidebarChat from "./SidebarChat";
 
-function Sidebar() {
+function Sidebar({addNewChat}) {
+  const [seed,setSeed] = useState("");
+  useEffect(() => {
+    setSeed(Math.floor(Math.random()*5000));
+  },[]);
     return (
         <div className="sidebar">
          <div className="sidebar__header">
@@ -34,7 +38,7 @@ function Sidebar() {
          </div>
 
          <div className="sidebar__chats">
-           <SidebarChat />
+           <SidebarChat addNewChat/>
            <SidebarChat />
            <SidebarChat />
            <SidebarChat />
