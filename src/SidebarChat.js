@@ -5,7 +5,7 @@ import './Sidebar'
 import db from "./firebase"
 import {Link} from "react-router-dom";
 
-function SidebarChat({ addNewChat, rName }) {
+function SidebarChat({ addNewChat, r_id, rName }) {
   const [seed, setSeed] = useState("");
 
   useEffect(() => {
