@@ -1,13 +1,16 @@
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import 'firebase/compat/storage';
 const firebaseConfig = {
-    apiKey: "AIzaSyCyYIhxnEZyeX8iSti--ObuZCSIMv5A1cY",
-    authDomain: "whats-app-clone-dfb71.firebaseapp.com",
-    projectId: "whats-app-clone-dfb71",
-    //alper torun database url girilmesi lazım :
-    storageBucket: "whats-app-clone-dfb71.appspot.com",
-    messagingSenderId: "997948125274",
-    appId: "1:997948125274:web:913e84c565b60d420c6863"
-    //alper torun measurment Id girilmesi lazıms :
-  };
+  apiKey: "AIzaSyCyYIhxnEZyeX8iSti--ObuZCSIMv5A1cY",
+  authDomain: "whats-app-clone-dfb71.firebaseapp.com",
+  databaseUrl: "https://whats-app-clone-dfb71.firebaseio.com",
+  projectId: "whats-app-clone-dfb71",
+  storageBucket: "whats-app-clone-dfb71.appspot.com",
+  messagingSenderId: "997948125274",
+  appId: "1:997948125274:web:913e84c565b60d420c6863"
+};
 
   const firebaseapp = firebase.initializeApp(firebaseConfig);
 
@@ -20,6 +23,5 @@ const firebaseConfig = {
 export {auth,provider};
 export default db;
 
-// 1.58.00 ---- devam//
 
 

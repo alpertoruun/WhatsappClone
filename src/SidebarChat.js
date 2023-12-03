@@ -17,7 +17,6 @@ const createChat = () => {
   const roomName = prompt ("Please enter for chat room  :: ");
   
   if (roomName){
-//sikik veritabanı işleri ....
 db.collection("rooms").add({name: roomName,});
  }
 };
