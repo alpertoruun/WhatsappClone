@@ -5,7 +5,7 @@ import './Sidebar'
 import db from "./firebase"
 import {Link} from "react-router-dom";
 
-function SidebarChat({ addNewChat, r_id, rName }) {
+function SidebarChat({ addNewChat, rName ,r_id }) {
   const [seed, setSeed] = useState("");
 
   useEffect(() => {
@@ -32,7 +32,6 @@ function SidebarChat({ addNewChat, r_id, rName }) {
       </div>
     </div>
   </Link>
-  
   ) : (
     <div onClick={createChat} className="sidebarChat">
       <h2>Add New Chat</h2>
