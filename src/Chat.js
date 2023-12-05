@@ -5,12 +5,23 @@ import "./Chat.css";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
 import { useParams } from 'react-router-dom';
+import db from "./firebase"
 
 function Chat() {
     const [seed, setSeed] = useState("");
     const [input, setInput] = useState("");
     const { roomId } = useParams();
+    const [roomName, setRoomName] = useState("");
 
+    useEffect(() => {   
+        if(roomId){
+          db.collection("rooms")
+          .doc(roomId)
+          .onSnapshot((snapshot) =>setRoomName
+          (snapshot.data().name))    
+        }
+    },  [roomId])
+        
     useEffect(() => { setSeed(Math.floor(Math.random() * 5000)) }, []);
     const sendMessage = (e) => {
         e.preventDefault();
@@ -21,24 +32,23 @@ function Chat() {
     
     return <div className="chat">
         <div className="chat_header">
-            <Avatar src={'https://api.dicebear.com/7.x/bottts/svg?seed=Charlie'} />
+        <Avatar src={'https://api.dicebear.com/7.x/bottts/svg?seed=Charlie'} />
             <div className="chat_headerInfo">
-                <h3>ROOM NAME</h3>
+                <h3>{roomName}</h3>
                 <p>Last seen at...</p>
             </div>
-            <div className="header_right">
+            
                 <div className='chat_headerRight'>
                     <IconButton>
                         <SearchOutlined />
                     </IconButton>
                     <IconButton>
                         <AttachFile />
-                    </IconButton>
+                      </IconButton>
                     <IconButton>
                         <MoreVert />
                     </IconButton>
                 </div>
-            </div>
         </div>
         <div className="chat_body">
             <p className={`chat_message ${true && 'chat_reciever'}`}>
