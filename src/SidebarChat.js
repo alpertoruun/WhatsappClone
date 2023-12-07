@@ -17,7 +17,6 @@ function SidebarChat({ addNewChat, rName ,r_id }) {
     if (roomName) {
       db.collection('rooms').add({
         rName : roomName,
-
       });
     }
   };

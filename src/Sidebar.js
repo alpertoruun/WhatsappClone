@@ -55,8 +55,6 @@ function Sidebar() {
         {rooms.map(room => (
   <SidebarChat key={room.id} r_id={room.id} rName={room.data.name} />
 ))}
-
-
       </div>
     </div>
   );
