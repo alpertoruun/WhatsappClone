@@ -12,26 +12,37 @@ function Chat() {
     const [input, setInput] = useState("");
     const { roomId } = useParams();
     // ...
-const [roomName, setRoomName] = useState("");
-
-useEffect(() => {
-    if (roomId) {
-        db.collection('rooms').doc(roomId).onSnapshot(snapshot => {
-            // setRoomName fonksiyonunu çağırmadan önce değeri kontrol et
-            const roomData = snapshot.data();
-            if (roomData) {
-                setRoomName(roomData.name);
-            }
-        })
-    }
-}, [roomId])
-// ...
+    const [roomName, setRoomName] = useState("");
+    const [messages, setMessages] = useState([]);
+    useEffect(() => {
+        if (roomId) {
+            db.collection('rooms').doc(roomId).onSnapshot(snapshot => {
+                // setRoomName fonksiyonunu çağırmadan önce değeri kontrol et
+                const roomData = snapshot.data();
+                if (roomData) {
+                    setRoomName(roomData.name);
+                }
+            })
+            db.collection('rooms').doc(roomId).
+                collection('messages').
+                orderBy('timestamp', 'asc').
+                onSnapshot(snapshot => (
+                    setMessages(snapshot.docs
+                        .map(doc => doc.data()))
+                ));
+        }
+    }, [roomId])
 
 
     useEffect(() => { setSeed(Math.floor(Math.random() * 5000)) }, []);
     const sendMessage = (e) => {
         e.preventDefault();
         console.log("you typed>>>>>>>", input);
+
+
+
+
+
         setInput("");
     }
 
