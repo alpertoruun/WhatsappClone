@@ -6,6 +6,7 @@ import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
 import { useParams } from 'react-router-dom';
 import db from './firebase';
+import firebase from 'firebase/compat/app';
 import { useStateValue } from './StateProvider';
 
 function Chat() {
@@ -42,8 +43,10 @@ function Chat() {
         console.log("you typed>>>>>>>", input);
 
         db.collection('rooms').doc(roomId).collection('messages').add({
-            name: user.displayName,
             message : input,
+            name: user.displayName,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            
         });
 
 
