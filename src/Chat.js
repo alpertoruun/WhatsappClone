@@ -43,10 +43,10 @@ function Chat() {
         console.log("you typed>>>>>>>", input);
 
         db.collection('rooms').doc(roomId).collection('messages').add({
-            message : input,
+            message: input,
             name: user.displayName,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            
+
         });
 
 
@@ -60,7 +60,12 @@ function Chat() {
             <Avatar src={'https://api.dicebear.com/7.x/bottts/svg?seed=Charlie'} />
             <div className="chat_headerInfo">
                 <h3>{roomName}</h3>
-                <p>Last seen at...</p>
+                <p>
+                    last seen{" "}
+                    {new Date(
+                        messages[messages.length - 1]?.timestamp?.toDate()
+                    ).toUTCString()}
+                </p>
             </div>
             <div className="header_right">
                 <div className='chat_headerRight'>
@@ -77,16 +82,16 @@ function Chat() {
             </div>
         </div>
         <div className="chat_body">
-            {messages.map((message, index) => (
-                <p key={index} className={`chat_message ${true && 'chat_reciever'}`}>
-                    <span className="chat_name">{message.name}</span>
-                    {message.message}
-                    <span className="chat_timestamp">
-                        {new Date(message.timestamp?.toDate()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' })}
-                    </span>
+        {messages.map((message, index) => (
+    <p key={index} className={`chat_message ${message.name === user.displayName && "chat_receiver"}`}>
+        <span className="chat_name">{message.name}</span>
+        {message.message}
+        <span className="chat_timestamp">
+            {new Date(message.timestamp?.toDate()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' })}
+        </span>
+    </p>
+))}
 
-                </p>
-            ))}
         </div>
 
         <div className="chat_footer">
