@@ -6,14 +6,16 @@ import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
 import { useParams } from 'react-router-dom';
 import db from './firebase';
+import { useStateValue } from './StateProvider';
 
 function Chat() {
     const [seed, setSeed] = useState("");
     const [input, setInput] = useState("");
     const { roomId } = useParams();
-    // ...
     const [roomName, setRoomName] = useState("");
     const [messages, setMessages] = useState([]);
+    const [{ user }, dispatch] = useStateValue();
+
     useEffect(() => {
         if (roomId) {
             db.collection('rooms').doc(roomId).onSnapshot(snapshot => {
@@ -39,7 +41,10 @@ function Chat() {
         e.preventDefault();
         console.log("you typed>>>>>>>", input);
 
-
+        db.collection('rooms').doc(roomId).collection('messages').add({
+            name: user.displayName,
+            message : input,
+        });
 
 
 
@@ -69,11 +74,18 @@ function Chat() {
             </div>
         </div>
         <div className="chat_body">
-            <p className={`chat_message ${true && 'chat_reciever'}`}>
-                <span className="chat_name">aNIL akgöl</span><>         </>
-                hey
-                <span className="chat_timestamp"> 3.52pm</span></p>
+            {messages.map((message, index) => (
+                <p key={index} className={`chat_message ${true && 'chat_reciever'}`}>
+                    <span className="chat_name">{message.name}</span>
+                    {message.message}
+                    <span className="chat_timestamp">
+                        {new Date(message.timestamp?.toDate()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' })}
+                    </span>
+
+                </p>
+            ))}
         </div>
+
         <div className="chat_footer">
             <InsertEmoticonIcon />
             <form>
