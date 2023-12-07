@@ -82,15 +82,15 @@ function Chat() {
             </div>
         </div>
         <div className="chat_body">
-        {messages.map((message, index) => (
-    <p key={index} className={`chat_message ${message.name === user.displayName && "chat_receiver"}`}>
-        <span className="chat_name">{message.name}</span>
-        {message.message}
-        <span className="chat_timestamp">
-            {new Date(message.timestamp?.toDate()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' })}
-        </span>
-    </p>
-))}
+            {messages.map((message, index) => (
+                <p key={index} className={`chat_message ${message.name === user.displayName && "chat_receiver"}`}>
+                    <span className="chat_name">{message.name}</span>
+                    {message.message}
+                    <span className="chat_timestamp">
+                        {new Date(message.timestamp?.toDate()).toLocaleString('en-US', { timeZone: 'Europe/Istanbul' })}
+                    </span>
+                </p>
+            ))}
 
         </div>
 
