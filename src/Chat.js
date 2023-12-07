@@ -5,25 +5,42 @@ import "./Chat.css";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
 import { useParams } from 'react-router-dom';
+import db from './firebase';
 
 function Chat() {
     const [seed, setSeed] = useState("");
     const [input, setInput] = useState("");
     const { roomId } = useParams();
+    // ...
+const [roomName, setRoomName] = useState("");
+
+useEffect(() => {
+    if (roomId) {
+        db.collection('rooms').doc(roomId).onSnapshot(snapshot => {
+            // setRoomName fonksiyonunu çağırmadan önce değeri kontrol et
+            const roomData = snapshot.data();
+            if (roomData) {
+                setRoomName(roomData.name);
+            }
+        })
+    }
+}, [roomId])
+// ...
+
 
     useEffect(() => { setSeed(Math.floor(Math.random() * 5000)) }, []);
     const sendMessage = (e) => {
         e.preventDefault();
-        console.log("you typed>>>>>>>",input);
+        console.log("you typed>>>>>>>", input);
         setInput("");
     }
 
-    
+
     return <div className="chat">
         <div className="chat_header">
             <Avatar src={'https://api.dicebear.com/7.x/bottts/svg?seed=Charlie'} />
             <div className="chat_headerInfo">
-                <h3>ROOM NAME</h3>
+                <h3>{roomName}</h3>
                 <p>Last seen at...</p>
             </div>
             <div className="header_right">
@@ -49,7 +66,7 @@ function Chat() {
         <div className="chat_footer">
             <InsertEmoticonIcon />
             <form>
-                <input value={input}  onChange={e => setInput(e.target.value)}  placeholder="Type a message" type="text" />
+                <input value={input} onChange={e => setInput(e.target.value)} placeholder="Type a message" type="text" />
                 <button onClick={sendMessage} type="submit">Send a Message</button>
             </form>
             <MicIcon />
