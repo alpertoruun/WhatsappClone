@@ -67,7 +67,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/a
 
 ### Deployment
 
+---
+1.firebase login
+2.firebase init
+3.choose the hosting firebase with space and press enter
+4.type public directory side build
+5.then type yes for single page app
+---> (optional git y/n)
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
 ### `npm run build` fails to minify
 
