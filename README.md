@@ -65,6 +65,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/a
 ### Deployment
 
 ---
+(npm install -g firebase-tools)
 1.firebase login
 2.firebase init
 3.choose the hosting firebase with space and press enter
